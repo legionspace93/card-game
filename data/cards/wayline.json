@@ -1,0 +1,675 @@
+[
+  {
+    "id": "road_warden",
+    "name": "Road Warden",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 3,
+    "atk": 3,
+    "hp": 4,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On play, heal your warden for 2.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "heal",
+          "amount": 2,
+          "target": {
+            "scope": "your_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "courier_kite",
+    "name": "Courier Kite",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 2,
+    "atk": 2,
+    "hp": 1,
+    "keywords": [
+      "rush"
+    ],
+    "text": "Rush. On play, draw 1.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "draw",
+          "amount": 1,
+          "target": {
+            "scope": "you"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "field_medic",
+    "name": "Field Medic",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 3,
+    "atk": 2,
+    "hp": 4,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On play, heal your warden for 5.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "heal",
+          "amount": 5,
+          "target": {
+            "scope": "your_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "shield_bearer",
+    "name": "Shield Bearer",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 2,
+    "atk": 1,
+    "hp": 5,
+    "keywords": [
+      "guard",
+      "ward"
+    ],
+    "text": "Guard, Ward. On death, heal your warden for 3.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "heal",
+          "amount": 3,
+          "target": {
+            "scope": "your_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "venom_darter",
+    "name": "Venom Darter",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 3,
+    "atk": 3,
+    "hp": 1,
+    "keywords": [
+      "venom",
+      "rush"
+    ],
+    "text": "Venom, Rush. On attack, deal 1 to the enemy warden.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_attack": [
+        {
+          "op": "damage",
+          "amount": 1,
+          "target": {
+            "scope": "opponent_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "pierce_lancer",
+    "name": "Pierce Lancer",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 4,
+    "atk": 4,
+    "hp": 4,
+    "keywords": [
+      "pierce"
+    ],
+    "text": "Pierce. On play, if you control a Guard, this gains +1/+1.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "buff",
+          "atk": 1,
+          "hp": 1,
+          "target": {
+            "scope": "self"
+          },
+          "if": {
+            "kind": "you_control_keyword",
+            "keyword": "guard"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "chain_medic",
+    "name": "Chain Medic",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 4,
+    "atk": 3,
+    "hp": 5,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On death, heal your warden for 6.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "heal",
+          "amount": 6,
+          "target": {
+            "scope": "your_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "recruit_drum",
+    "name": "Recruit Drum",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 3,
+    "atk": 2,
+    "hp": 3,
+    "keywords": [
+      "rush"
+    ],
+    "text": "Rush. On play, summon a Way Recruit.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "summon",
+          "card": "way_recruit"
+        }
+      ]
+    }
+  },
+  {
+    "id": "tax_scribe",
+    "name": "Tax Scribe",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 2,
+    "atk": 2,
+    "hp": 3,
+    "keywords": [
+      "ward"
+    ],
+    "text": "Ward. At the end of your turn, mill the enemy deck 1.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "while_board": [
+        {
+          "op": "listen",
+          "event": "your_end",
+          "effects": [
+            {
+              "op": "mill",
+              "amount": 1,
+              "target": {
+                "scope": "opponent"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "silence_bell",
+    "name": "Silence Bell",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 5,
+    "atk": 3,
+    "hp": 5,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On play, silence all enemy units.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "silence",
+          "target": {
+            "scope": "all_enemy_units"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "horizon_breaker",
+    "name": "Horizon Breaker",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 8,
+    "atk": 8,
+    "hp": 8,
+    "keywords": [
+      "rush",
+      "pierce",
+      "breach"
+    ],
+    "text": "Rush, Pierce, Breach. Tribute 1. On attack, deal 2 to the enemy warden.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_attack": [
+        {
+          "op": "damage",
+          "amount": 2,
+          "target": {
+            "scope": "opponent_warden"
+          }
+        }
+      ]
+    },
+    "alt": {
+      "type": "tribute",
+      "amount": 1
+    }
+  },
+  {
+    "id": "night_broker",
+    "name": "Night Broker",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 4,
+    "atk": 4,
+    "hp": 4,
+    "keywords": [
+      "rush"
+    ],
+    "text": "Rush. Shed 1. On play, search your deck for any card and put it into your hand.",
+    "targets": [],
+    "picks": [
+      {
+        "zone": "deck",
+        "type": "any",
+        "count": 1
+      }
+    ],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "take_pick",
+          "index": 0,
+          "dest": "hand"
+        }
+      ]
+    },
+    "alt": {
+      "type": "discard",
+      "amount": 1
+    }
+  },
+  {
+    "id": "equalizer_golem",
+    "name": "Equalizer Golem",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 4,
+    "atk": 3,
+    "hp": 5,
+    "keywords": [
+      "ward"
+    ],
+    "text": "Ward. On play, set every other unit to 2/2. That becomes its base.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "set_stats",
+          "atk": 2,
+          "hp": 2,
+          "target": {
+            "scope": "all_units_except_self"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "lane_captain",
+    "name": "Lane Captain",
+    "faction": "wayline",
+    "type": "unit",
+    "cost": 3,
+    "atk": 2,
+    "hp": 4,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On play, ready another friendly unit.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "friendly"
+      }
+    ],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "ready",
+          "target": {
+            "ref": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "banishing_seal",
+    "name": "Banishing Seal",
+    "faction": "wayline",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 4,
+    "text": "Silence a unit, then destroy it. Death hooks do not fire.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "any"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "silence",
+        "target": {
+          "ref": 0
+        }
+      },
+      {
+        "op": "destroy",
+        "target": {
+          "ref": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "market_sweep",
+    "name": "Market Sweep",
+    "faction": "wayline",
+    "type": "spell",
+    "speed": "instant",
+    "cost": 3,
+    "text": "Bounce an enemy unit, then shed your cheapest card.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "enemy"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "bounce",
+        "target": {
+          "ref": 0
+        }
+      },
+      {
+        "op": "shed",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      }
+    ]
+  },
+  {
+    "id": "energy_well",
+    "name": "Energy Well",
+    "faction": "wayline",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 2,
+    "text": "Raise your spark cap by 1, refresh 1 spark, draw 1, then shed your cheapest card.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "ramp",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      },
+      {
+        "op": "draw",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      },
+      {
+        "op": "shed",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sundering_arc",
+    "name": "Sundering Arc",
+    "faction": "wayline",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 5,
+    "text": "Deal 4 to a unit and 2 to the enemy warden.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "any"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "damage",
+        "amount": 4,
+        "target": {
+          "ref": 0
+        }
+      },
+      {
+        "op": "damage",
+        "amount": 2,
+        "target": {
+          "scope": "opponent_warden"
+        }
+      }
+    ]
+  },
+  {
+    "id": "grave_trade",
+    "name": "Grave Trade",
+    "faction": "wayline",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 1,
+    "text": "Shed 1. Draw 2.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "draw",
+        "amount": 2,
+        "target": {
+          "scope": "you"
+        }
+      }
+    ],
+    "alt": {
+      "type": "discard",
+      "amount": 1
+    }
+  },
+  {
+    "id": "open_the_cache",
+    "name": "Open the Cache",
+    "faction": "wayline",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 1,
+    "text": "Draw 1. If your graveyard has 6 or more cards, draw 1 more.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "draw",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      },
+      {
+        "op": "draw",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        },
+        "if": {
+          "kind": "your_grave_at_least",
+          "n": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "equalize",
+    "name": "Equalize",
+    "faction": "wayline",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 3,
+    "text": "Set a unit to 2/2. That becomes its base. Keywords stay.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "any"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "set_stats",
+        "atk": 2,
+        "hp": 2,
+        "target": {
+          "ref": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "last_light",
+    "name": "Last Light",
+    "faction": "wayline",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 6,
+    "text": "Deal 7 to the enemy warden and 3 to your warden.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "damage",
+        "amount": 7,
+        "target": {
+          "scope": "opponent_warden"
+        }
+      },
+      {
+        "op": "damage",
+        "amount": 3,
+        "target": {
+          "scope": "your_warden"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ambush_wire",
+    "name": "Ambush Wire",
+    "faction": "wayline",
+    "type": "trap",
+    "cost": 2,
+    "trigger": "attack",
+    "text": "Answer an attack: if the attacker has Rush, destroy it.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "destroy",
+        "target": {
+          "scope": "event_attacker"
+        },
+        "if": {
+          "kind": "event_attacker_has_keyword",
+          "keyword": "rush"
+        }
+      }
+    ]
+  },
+  {
+    "id": "cache_ward",
+    "name": "Cache Ward",
+    "faction": "wayline",
+    "type": "trap",
+    "cost": 2,
+    "trigger": "spell",
+    "text": "Answer a spell: negate it, then draw 1.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "negate"
+      },
+      {
+        "op": "draw",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      }
+    ]
+  }
+]

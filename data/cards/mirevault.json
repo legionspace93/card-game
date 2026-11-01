@@ -1,0 +1,666 @@
+[
+  {
+    "id": "barrow_mite",
+    "name": "Barrow Mite",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 1,
+    "atk": 1,
+    "hp": 1,
+    "keywords": [
+      "venom"
+    ],
+    "text": "Venom. On death, draw 1.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "draw",
+          "amount": 1,
+          "target": {
+            "scope": "you"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "peat_shambler",
+    "name": "Peat Shambler",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 2,
+    "atk": 2,
+    "hp": 3,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On death, summon a Peat Spore.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "summon",
+          "card": "peat_spore"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mire_colossus",
+    "name": "Mire Colossus",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 6,
+    "atk": 6,
+    "hp": 7,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. Tribute 2. On play, heal your warden for 6.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "heal",
+          "amount": 6,
+          "target": {
+            "scope": "your_warden"
+          }
+        }
+      ]
+    },
+    "alt": {
+      "type": "tribute",
+      "amount": 2
+    }
+  },
+  {
+    "id": "grave_tender",
+    "name": "Grave Tender",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 3,
+    "atk": 2,
+    "hp": 4,
+    "keywords": [
+      "ward"
+    ],
+    "text": "Ward. On play, return a unit from your graveyard to your hand.",
+    "targets": [],
+    "picks": [
+      {
+        "zone": "grave",
+        "type": "unit",
+        "count": 1
+      }
+    ],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "take_pick",
+          "index": 0,
+          "dest": "hand"
+        }
+      ]
+    }
+  },
+  {
+    "id": "sporeburst",
+    "name": "Sporeburst",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 2,
+    "atk": 1,
+    "hp": 3,
+    "keywords": [
+      "siphon"
+    ],
+    "text": "Siphon. On death, deal 1 to all enemy units.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "damage",
+          "amount": 1,
+          "target": {
+            "scope": "all_enemy_units"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "bog_warden",
+    "name": "Bog Warden",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 4,
+    "atk": 3,
+    "hp": 6,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On play, heal your warden for 2. Other friendlies have +1 attack.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "heal",
+          "amount": 2,
+          "target": {
+            "scope": "your_warden"
+          }
+        }
+      ],
+      "while_board": [
+        {
+          "op": "aura_atk",
+          "amount": 1,
+          "who": "other_friendly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "lantern_leech",
+    "name": "Lantern Leech",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 3,
+    "atk": 3,
+    "hp": 3,
+    "keywords": [
+      "siphon"
+    ],
+    "text": "Siphon. On death, heal your warden for 4.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "heal",
+          "amount": 4,
+          "target": {
+            "scope": "your_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "barrow_wall",
+    "name": "Barrow Wall",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 1,
+    "atk": 0,
+    "hp": 5,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On death, raise your spark cap by 1 and refresh 1 spark.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "ramp",
+          "amount": 1,
+          "target": {
+            "scope": "you"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "rootcage",
+    "name": "Rootcage",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 5,
+    "atk": 4,
+    "hp": 6,
+    "keywords": [
+      "pierce"
+    ],
+    "text": "Pierce. On attack, heal your warden for 3.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_attack": [
+        {
+          "op": "heal",
+          "amount": 3,
+          "target": {
+            "scope": "your_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "widow_moss",
+    "name": "Widow Moss",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 3,
+    "atk": 3,
+    "hp": 2,
+    "keywords": [
+      "venom"
+    ],
+    "text": "Venom. On play, mill the enemy deck 2.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "mill",
+          "amount": 2,
+          "target": {
+            "scope": "opponent"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "bog_whisper",
+    "name": "Bog Whisper",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 2,
+    "atk": 1,
+    "hp": 4,
+    "keywords": [
+      "ward"
+    ],
+    "text": "Ward. Whenever you cast a spell, this gains +1 attack.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_spell": [
+        {
+          "op": "buff",
+          "atk": 1,
+          "hp": 0,
+          "target": {
+            "scope": "self"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "dredge_grub",
+    "name": "Dredge Grub",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 1,
+    "atk": 1,
+    "hp": 2,
+    "keywords": [
+      "rush"
+    ],
+    "text": "Rush. On play, mill 2. If your graveyard then has 6 or more cards, this gains +2/+2.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "mill",
+          "amount": 2,
+          "target": {
+            "scope": "you"
+          }
+        },
+        {
+          "op": "buff",
+          "atk": 2,
+          "hp": 2,
+          "target": {
+            "scope": "self"
+          },
+          "if": {
+            "kind": "your_grave_at_least",
+            "n": 6
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "bone_lantern",
+    "name": "Bone Lantern",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 4,
+    "atk": 2,
+    "hp": 5,
+    "keywords": [
+      "ward"
+    ],
+    "text": "Ward. While this is on the board, whenever another friendly unit dies, draw 1.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "while_board": [
+        {
+          "op": "listen",
+          "event": "friendly_death",
+          "effects": [
+            {
+              "op": "draw",
+              "amount": 1,
+              "target": {
+                "scope": "you"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "hungering_barrow",
+    "name": "Hungering Barrow",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 7,
+    "atk": 8,
+    "hp": 8,
+    "keywords": [
+      "pierce",
+      "breach"
+    ],
+    "text": "Pierce, Breach. Tribute 2. On play, deal 3 to all enemy units.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "damage",
+          "amount": 3,
+          "target": {
+            "scope": "all_enemy_units"
+          }
+        }
+      ]
+    },
+    "alt": {
+      "type": "tribute",
+      "amount": 2
+    }
+  },
+  {
+    "id": "mire_lamp",
+    "name": "Mire Lamp",
+    "faction": "mirevault",
+    "type": "unit",
+    "cost": 2,
+    "atk": 2,
+    "hp": 2,
+    "keywords": [
+      "rush"
+    ],
+    "text": "Rush. On death, fetch the cheapest unit from your deck.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "fetch",
+          "type": "unit",
+          "dest": "hand"
+        }
+      ]
+    }
+  },
+  {
+    "id": "tribute_of_roots",
+    "name": "Tribute of Roots",
+    "faction": "mirevault",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 0,
+    "text": "Tribute 1. Raise your spark cap by 1, refresh 1 spark, and draw 1.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "ramp",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      },
+      {
+        "op": "draw",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      }
+    ],
+    "alt": {
+      "type": "tribute",
+      "amount": 1
+    }
+  },
+  {
+    "id": "mulch_the_line",
+    "name": "Mulch the Line",
+    "faction": "mirevault",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 3,
+    "text": "Destroy a unit. Raise your spark cap by 1 and refresh 1 spark.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "any"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "destroy",
+        "target": {
+          "ref": 0
+        }
+      },
+      {
+        "op": "ramp",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crypt_tutor",
+    "name": "Crypt Tutor",
+    "faction": "mirevault",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 2,
+    "text": "Shed 1. Search your deck for any card and put it into your hand.",
+    "targets": [],
+    "picks": [
+      {
+        "zone": "deck",
+        "type": "any",
+        "count": 1
+      }
+    ],
+    "effects": [
+      {
+        "op": "take_pick",
+        "index": 0,
+        "dest": "hand"
+      }
+    ],
+    "alt": {
+      "type": "discard",
+      "amount": 1
+    }
+  },
+  {
+    "id": "mossbind",
+    "name": "Mossbind",
+    "faction": "mirevault",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 2,
+    "text": "Silence a unit, then deal 1 to it.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "any"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "silence",
+        "target": {
+          "ref": 0
+        }
+      },
+      {
+        "op": "damage",
+        "amount": 1,
+        "target": {
+          "ref": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "thicket_reclaim",
+    "name": "Thicket Reclaim",
+    "faction": "mirevault",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 4,
+    "text": "Summon two Peat Spores.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "summon",
+        "card": "peat_spore"
+      },
+      {
+        "op": "summon",
+        "card": "peat_spore"
+      }
+    ]
+  },
+  {
+    "id": "last_harvest",
+    "name": "Last Harvest",
+    "faction": "mirevault",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 2,
+    "text": "Destroy a friendly unit. Draw 3.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "friendly"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "destroy",
+        "target": {
+          "ref": 0
+        }
+      },
+      {
+        "op": "draw",
+        "amount": 3,
+        "target": {
+          "scope": "you"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sacrifice_rite",
+    "name": "Sacrifice Rite",
+    "faction": "mirevault",
+    "type": "spell",
+    "speed": "instant",
+    "cost": 1,
+    "text": "Tribute 1. Negate a spell on the chain.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "negate"
+      }
+    ],
+    "alt": {
+      "type": "tribute",
+      "amount": 1
+    },
+    "answers": "spell"
+  },
+  {
+    "id": "mire_snare",
+    "name": "Mire Snare",
+    "faction": "mirevault",
+    "type": "trap",
+    "cost": 2,
+    "trigger": "summon",
+    "text": "Answer a unit played from hand: negate that summon, then mill the enemy deck 2.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "negate"
+      },
+      {
+        "op": "mill",
+        "amount": 2,
+        "target": {
+          "scope": "opponent"
+        }
+      }
+    ]
+  },
+  {
+    "id": "root_net",
+    "name": "Root Net",
+    "faction": "mirevault",
+    "type": "trap",
+    "cost": 2,
+    "trigger": "attack",
+    "text": "Answer an attack: if the attacker has 3 or less attack, destroy it.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "destroy",
+        "target": {
+          "scope": "event_attacker"
+        },
+        "if": {
+          "kind": "event_attacker_atk_at_most",
+          "n": 3
+        }
+      }
+    ]
+  }
+]

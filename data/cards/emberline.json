@@ -1,0 +1,640 @@
+[
+  {
+    "id": "cinder_skirmisher",
+    "name": "Cinder Skirmisher",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 1,
+    "atk": 2,
+    "hp": 1,
+    "keywords": [
+      "rush"
+    ],
+    "text": "Rush. On play, deal 1 to the enemy warden.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "damage",
+          "amount": 1,
+          "target": {
+            "scope": "opponent_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "ash_vowblade",
+    "name": "Ash Vowblade",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 2,
+    "atk": 3,
+    "hp": 2,
+    "keywords": [
+      "rush"
+    ],
+    "text": "Rush. Life 2. On attack, deal 1 to the enemy warden.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_attack": [
+        {
+          "op": "damage",
+          "amount": 1,
+          "target": {
+            "scope": "opponent_warden"
+          }
+        }
+      ]
+    },
+    "alt": {
+      "type": "life",
+      "amount": 2
+    }
+  },
+  {
+    "id": "brand_captain",
+    "name": "Brand Captain",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 3,
+    "atk": 2,
+    "hp": 3,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. Other friendly units have +1 attack.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "while_board": [
+        {
+          "op": "aura_atk",
+          "amount": 1,
+          "who": "other_friendly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "kindling_totem",
+    "name": "Kindling Totem",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 1,
+    "atk": 0,
+    "hp": 3,
+    "keywords": [
+      "ward"
+    ],
+    "text": "Ward. Whenever you cast a spell, deal 1 to the enemy warden.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_spell": [
+        {
+          "op": "damage",
+          "amount": 1,
+          "target": {
+            "scope": "opponent_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "cindermaw",
+    "name": "Cindermaw",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 4,
+    "atk": 4,
+    "hp": 3,
+    "keywords": [
+      "rush",
+      "pierce"
+    ],
+    "text": "Rush, Pierce. Life 3. On attack, this gains +1 attack.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_attack": [
+        {
+          "op": "buff",
+          "atk": 1,
+          "hp": 0,
+          "target": {
+            "scope": "self"
+          }
+        }
+      ]
+    },
+    "alt": {
+      "type": "life",
+      "amount": 3
+    }
+  },
+  {
+    "id": "ashen_herald",
+    "name": "Ashen Herald",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 3,
+    "atk": 3,
+    "hp": 3,
+    "keywords": [
+      "rush"
+    ],
+    "text": "Rush. On play, summon a Cinder Spark into the first empty lane.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "summon",
+          "card": "cinder_spark"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ember_sentry",
+    "name": "Ember Sentry",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 2,
+    "atk": 1,
+    "hp": 4,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On play, heal your warden for 3.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "heal",
+          "amount": 3,
+          "target": {
+            "scope": "your_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "twin_brand",
+    "name": "Twin Brand",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 3,
+    "atk": 2,
+    "hp": 2,
+    "keywords": [
+      "twinstrike"
+    ],
+    "text": "Twinstrike. On attack, deal 1 to the enemy warden.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_attack": [
+        {
+          "op": "damage",
+          "amount": 1,
+          "target": {
+            "scope": "opponent_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "siphon_imp",
+    "name": "Siphon Imp",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 2,
+    "atk": 2,
+    "hp": 1,
+    "keywords": [
+      "siphon",
+      "rush"
+    ],
+    "text": "Siphon, Rush. On death, deal 2 to the enemy warden.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "damage",
+          "amount": 2,
+          "target": {
+            "scope": "opponent_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "grave_ember",
+    "name": "Grave Ember",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 4,
+    "atk": 4,
+    "hp": 4,
+    "keywords": [
+      "pierce"
+    ],
+    "text": "Pierce. On death, deal 2 to all enemy units.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "damage",
+          "amount": 2,
+          "target": {
+            "scope": "all_enemy_units"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "breach_runner",
+    "name": "Breach Runner",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 2,
+    "atk": 3,
+    "hp": 2,
+    "keywords": [
+      "breach",
+      "rush"
+    ],
+    "text": "Breach, Rush. On play, draw 1, then shed your cheapest card.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "draw",
+          "amount": 1,
+          "target": {
+            "scope": "you"
+          }
+        },
+        {
+          "op": "shed",
+          "amount": 1,
+          "target": {
+            "scope": "you"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "self_pyre",
+    "name": "Self Pyre",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 3,
+    "atk": 3,
+    "hp": 4,
+    "keywords": [
+      "ward"
+    ],
+    "text": "Ward. Life 2. On play, draw 2.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "draw",
+          "amount": 2,
+          "target": {
+            "scope": "you"
+          }
+        }
+      ]
+    },
+    "alt": {
+      "type": "life",
+      "amount": 2
+    }
+  },
+  {
+    "id": "soot_lantern",
+    "name": "Soot Lantern",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 2,
+    "atk": 2,
+    "hp": 2,
+    "keywords": [
+      "siphon"
+    ],
+    "text": "Siphon. Whenever you cast a spell, this gains +1/+1.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_spell": [
+        {
+          "op": "buff",
+          "atk": 1,
+          "hp": 1,
+          "target": {
+            "scope": "self"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "pyre_colossus",
+    "name": "Pyre Colossus",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 6,
+    "atk": 7,
+    "hp": 6,
+    "keywords": [
+      "rush",
+      "pierce",
+      "breach"
+    ],
+    "text": "Rush, Pierce, Breach. Life 5. On play, deal 4 to the enemy warden.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "damage",
+          "amount": 4,
+          "target": {
+            "scope": "opponent_warden"
+          }
+        }
+      ]
+    },
+    "alt": {
+      "type": "life",
+      "amount": 5
+    }
+  },
+  {
+    "id": "coal_mask",
+    "name": "Coal Mask",
+    "faction": "emberline",
+    "type": "unit",
+    "cost": 1,
+    "atk": 2,
+    "hp": 1,
+    "keywords": [
+      "venom"
+    ],
+    "text": "Venom. On death, summon a Cinder Spark.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "summon",
+          "card": "cinder_spark"
+        }
+      ]
+    }
+  },
+  {
+    "id": "pyre_leap",
+    "name": "Pyre Leap",
+    "faction": "emberline",
+    "type": "spell",
+    "speed": "instant",
+    "cost": 1,
+    "text": "Deal 2 to the enemy warden. If you paid life this turn, deal 2 more.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "damage",
+        "amount": 2,
+        "target": {
+          "scope": "opponent_warden"
+        }
+      },
+      {
+        "op": "damage",
+        "amount": 2,
+        "target": {
+          "scope": "opponent_warden"
+        },
+        "if": {
+          "kind": "life_paid_this_turn"
+        }
+      }
+    ]
+  },
+  {
+    "id": "scorch_lattice",
+    "name": "Scorch Lattice",
+    "faction": "emberline",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 3,
+    "text": "Deal 2 to all enemy units.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "damage",
+        "amount": 2,
+        "target": {
+          "scope": "all_enemy_units"
+        }
+      }
+    ]
+  },
+  {
+    "id": "life_for_cinders",
+    "name": "Life for Cinders",
+    "faction": "emberline",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 1,
+    "text": "Life 4. Raise your spark cap by 2 and refresh 2 spark.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "ramp",
+        "amount": 2,
+        "target": {
+          "scope": "you"
+        }
+      }
+    ],
+    "alt": {
+      "type": "life",
+      "amount": 4
+    }
+  },
+  {
+    "id": "final_brand",
+    "name": "Final Brand",
+    "faction": "emberline",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 5,
+    "text": "Life 5. Deal 8 to the enemy warden.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "damage",
+        "amount": 8,
+        "target": {
+          "scope": "opponent_warden"
+        }
+      }
+    ],
+    "alt": {
+      "type": "life",
+      "amount": 5
+    }
+  },
+  {
+    "id": "molten_pact",
+    "name": "Molten Pact",
+    "faction": "emberline",
+    "type": "spell",
+    "speed": "instant",
+    "cost": 3,
+    "text": "Life 3. Destroy an enemy unit.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "enemy"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "destroy",
+        "target": {
+          "ref": 0
+        }
+      }
+    ],
+    "alt": {
+      "type": "life",
+      "amount": 3
+    }
+  },
+  {
+    "id": "rally_the_coals",
+    "name": "Rally the Coals",
+    "faction": "emberline",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 3,
+    "text": "Friendly units gain +1/+1.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "buff",
+        "atk": 1,
+        "hp": 1,
+        "target": {
+          "scope": "all_friendly_units"
+        }
+      }
+    ]
+  },
+  {
+    "id": "overburn",
+    "name": "Overburn",
+    "faction": "emberline",
+    "type": "spell",
+    "speed": "instant",
+    "cost": 2,
+    "text": "Deal 4 to a unit. If your life is below 12, deal 2 more to it.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "any"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "damage",
+        "amount": 4,
+        "target": {
+          "ref": 0
+        }
+      },
+      {
+        "op": "damage",
+        "amount": 2,
+        "target": {
+          "ref": 0
+        },
+        "if": {
+          "kind": "self_life_below",
+          "n": 12
+        }
+      }
+    ]
+  },
+  {
+    "id": "heat_mirror",
+    "name": "Heat Mirror",
+    "faction": "emberline",
+    "type": "trap",
+    "cost": 2,
+    "trigger": "attack",
+    "text": "Answer an attack: deal 3 to the attacker.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "damage",
+        "amount": 3,
+        "target": {
+          "scope": "event_attacker"
+        }
+      }
+    ]
+  },
+  {
+    "id": "cinder_snare",
+    "name": "Cinder Snare",
+    "faction": "emberline",
+    "type": "trap",
+    "cost": 2,
+    "trigger": "summon",
+    "text": "Answer a unit played from hand: negate that summon and deal 1 to the enemy warden.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "negate"
+      },
+      {
+        "op": "damage",
+        "amount": 1,
+        "target": {
+          "scope": "opponent_warden"
+        }
+      }
+    ]
+  }
+]
