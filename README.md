@@ -46,7 +46,7 @@ scripts/      view
 vfx/          flashes
 ```
 
-Card frames are drawn in code. No imported art.
+Card frames, faction sigils, and the table are drawn in the engine. No imported art.
 
 ## Limits
 

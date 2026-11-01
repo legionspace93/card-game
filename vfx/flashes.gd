@@ -48,26 +48,38 @@ func burst(world_pos: Vector2, style: String, text: String) -> void:
 	host.position = to_local(world_pos)
 	add_child(host)
 
+	var plate := ColorRect.new()
+	plate.color = Color(0.08, 0.05, 0.06, 0.88)
+	plate.position = Vector2(-96, -20)
+	plate.size = Vector2(192, 36)
+	host.add_child(plate)
+	var stripe := ColorRect.new()
+	stripe.color = color
+	stripe.position = Vector2(-96, 14)
+	stripe.size = Vector2(192, 3)
+	host.add_child(stripe)
+
 	var label := Label.new()
 	label.text = text
-	label.position = Vector2(-70, -18)
-	label.size = Vector2(140, 28)
+	label.position = Vector2(-96, -18)
+	label.size = Vector2(192, 32)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", 18 if style != "chain_resolve" else 22)
 	label.add_theme_color_override("font_color", color)
 	host.add_child(label)
 
 	var bits := CPUParticles2D.new()
 	bits.one_shot = true
-	bits.explosiveness = 0.9
-	bits.amount = 8 if style == "phase" else 20
-	bits.lifetime = 0.42
+	bits.explosiveness = 0.92
+	bits.amount = 12 if style == "phase" else 32
+	bits.lifetime = 0.48
 	bits.spread = 180.0
-	bits.gravity = Vector2(0, 30)
-	bits.initial_velocity_min = 24.0
-	bits.initial_velocity_max = 120.0
+	bits.gravity = Vector2(0, 40)
+	bits.initial_velocity_min = 30.0
+	bits.initial_velocity_max = 150.0
 	bits.scale_amount_min = 2.0
-	bits.scale_amount_max = 5.0
+	bits.scale_amount_max = 6.0
 	bits.color = color
 	bits.emitting = true
 	host.add_child(bits)

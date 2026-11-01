@@ -9,6 +9,8 @@ const BotScript = preload("res://rules/bot.gd")
 const FlashScript = preload("res://vfx/flashes.gd")
 const KeywordScript = preload("res://rules/keywords.gd")
 const CardWidgetScript = preload("res://scripts/card_widget.gd")
+const ClothScript = preload("res://scripts/table_cloth.gd")
+const AshTheme = preload("res://scripts/ash_theme.gd")
 
 var duel = null
 var db: Dictionary = {}
@@ -45,6 +47,7 @@ var you_lanes: HBoxContainer
 var veil_row: HBoxContainer
 var choice_box: VBoxContainer
 var fx: Node2D
+var motes: CPUParticles2D
 var over_panel: PanelContainer
 var over_label: Label
 var confirm_button: Button
@@ -76,11 +79,24 @@ func start_match(card_db: Dictionary, you_deck: Dictionary, rook_deck: Dictionar
 
 
 func _build() -> void:
-	var bg := ColorRect.new()
-	bg.color = Color("120e18")
+	var bg = ClothScript.new()
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
-	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bg)
+	motes = CPUParticles2D.new()
+	motes.amount = 26
+	motes.lifetime = 5.5
+	motes.preprocess = 2.0
+	motes.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE
+	motes.emission_rect_extents = Vector2(460, 14)
+	motes.direction = Vector2(0, -1)
+	motes.spread = 24
+	motes.gravity = Vector2(0, -6)
+	motes.initial_velocity_min = 6
+	motes.initial_velocity_max = 18
+	motes.scale_amount_min = 1.4
+	motes.scale_amount_max = 3.2
+	motes.color = Color(1.0, 0.55, 0.22, 0.4)
+	add_child(motes)
 
 	var margin := MarginContainer.new()
 	margin.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -99,11 +115,12 @@ func _build() -> void:
 	var board := VBoxContainer.new()
 	board.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	board.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	board.add_theme_constant_override("separation", 6)
+	board.add_theme_constant_override("separation", 4)
 	columns.add_child(board)
 
 	rook_bar = Button.new()
 	rook_bar.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	rook_bar.custom_minimum_size = Vector2(0, 52)
 	rook_bar.pressed.connect(_click_face)
 	_paint_button(rook_bar)
 	board.add_child(rook_bar)
@@ -118,8 +135,8 @@ func _build() -> void:
 	board.add_child(opp_lanes)
 
 	status_label = Label.new()
-	status_label.add_theme_font_size_override("font_size", 22)
-	status_label.add_theme_color_override("font_color", Color("f4efe6"))
+	status_label.add_theme_font_size_override("font_size", 20)
+	status_label.add_theme_color_override("font_color", AshTheme.ink())
 	board.add_child(status_label)
 	chain_label = Label.new()
 	chain_label.add_theme_color_override("font_color", Color("9ad7ff"))
@@ -144,13 +161,15 @@ func _build() -> void:
 	you_bar = Button.new()
 	you_bar.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	you_bar.disabled = true
+	you_bar.custom_minimum_size = Vector2(0, 52)
 	_paint_button(you_bar)
+	you_bar.add_theme_color_override("font_disabled_color", AshTheme.ink())
 	board.add_child(you_bar)
 
 	hint_label = Label.new()
 	hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	hint_label.custom_minimum_size = Vector2(0, 48)
-	hint_label.add_theme_color_override("font_color", Color("d9d0c4"))
+	hint_label.custom_minimum_size = Vector2(0, 28)
+	hint_label.add_theme_color_override("font_color", Color("efe4d4"))
 	board.add_child(hint_label)
 
 	var buttons := HBoxContainer.new()
@@ -166,21 +185,26 @@ func _build() -> void:
 	for btn in [pass_button, end_button, confirm_button, cancel, skip, faster, menu]:
 		buttons.add_child(btn)
 
-	var side := VBoxContainer.new()
+	var side := PanelContainer.new()
 	side.custom_minimum_size = Vector2(280, 0)
 	side.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	AshTheme.plate(side, Color("8a5a32"), Color(0.09, 0.05, 0.05, 0.78))
 	columns.add_child(side)
+	var side_box := VBoxContainer.new()
+	side_box.add_theme_constant_override("separation", 8)
+	side.add_child(side_box)
 	var side_title := Label.new()
-	side_title.text = "Chain log"
-	side_title.add_theme_color_override("font_color", Color("e6d3a3"))
-	side.add_child(side_title)
+	side_title.text = "Chain"
+	side_title.add_theme_font_size_override("font_size", 18)
+	side_title.add_theme_color_override("font_color", AshTheme.gold())
+	side_box.add_child(side_title)
 	log_label = Label.new()
 	log_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	log_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	log_label.add_theme_color_override("font_color", Color("c8bfb4"))
-	side.add_child(log_label)
+	log_label.add_theme_color_override("font_color", Color("efe4d4"))
+	side_box.add_child(log_label)
 	choice_box = VBoxContainer.new()
-	side.add_child(choice_box)
+	side_box.add_child(choice_box)
 
 	fx = FlashScript.new()
 	fx.z_index = 20
@@ -189,8 +213,9 @@ func _build() -> void:
 	over_panel = PanelContainer.new()
 	over_panel.visible = false
 	over_panel.set_anchors_preset(Control.PRESET_CENTER)
-	over_panel.position = Vector2(390, 250)
-	over_panel.custom_minimum_size = Vector2(500, 180)
+	over_panel.position = Vector2(470, 320)
+	over_panel.custom_minimum_size = Vector2(520, 180)
+	AshTheme.plate(over_panel, AshTheme.gold(), Color("1a1216"))
 	add_child(over_panel)
 	var over_box := VBoxContainer.new()
 	over_panel.add_child(over_box)
@@ -215,24 +240,12 @@ func _button(text: String, callback: Callable) -> Button:
 
 
 func _paint_button(btn: Button) -> void:
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color("2c2538")
-	normal.border_color = Color("6d5c4a")
-	normal.set_border_width_all(1)
-	normal.set_corner_radius_all(6)
-	normal.content_margin_left = 10
-	normal.content_margin_right = 10
-	normal.content_margin_top = 6
-	normal.content_margin_bottom = 6
-	var hover := normal.duplicate()
-	hover.bg_color = Color("3c3450")
-	btn.add_theme_stylebox_override("normal", normal)
-	btn.add_theme_stylebox_override("hover", hover)
-	btn.add_theme_stylebox_override("pressed", hover)
-	btn.add_theme_stylebox_override("disabled", normal)
-	btn.add_theme_color_override("font_color", Color("f4efe6"))
-	btn.add_theme_color_override("font_hover_color", Color("f2c14e"))
-	btn.add_theme_color_override("font_disabled_color", Color("8d8478"))
+	AshTheme.paint_button(btn)
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED and motes != null:
+		motes.position = size * Vector2(0.38, 0.46)
 
 
 func _on_tick() -> void:
@@ -292,16 +305,92 @@ func _refresh() -> void:
 
 
 func _fill_bars() -> void:
-	you_bar.text = "You  ·  %s  ·  %s" % [_vitals(HUMAN), str(deck_you.get("name", ""))]
-	rook_bar.text = "Rook  ·  %s  ·  %s" % [_vitals(BOT), str(deck_rook.get("name", ""))]
+	_fill_plate(you_bar, "You", HUMAN, deck_you)
+	_fill_plate(rook_bar, "Rook", BOT, deck_rook)
 
 
-func _vitals(pid: int) -> String:
+func _fill_plate(btn: Button, title: String, pid: int, deck: Dictionary) -> void:
+	btn.text = ""
+	_wipe(btn)
 	var who: Dictionary = duel.players[pid]
-	return "Life %d   Spark %d/%d   Deck %d   Grave %d   Veil %d" % [
-		int(who.life), int(who.energy), int(who.max_energy),
-		who.deck.size(), who.grave.size(), who.veil.size(),
+	var row := HBoxContainer.new()
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_theme_constant_override("separation", 14)
+	row.set_anchors_preset(Control.PRESET_FULL_RECT)
+	row.offset_left = 10
+	row.offset_top = 4
+	row.offset_right = -10
+	row.offset_bottom = -4
+	btn.add_child(row)
+
+	var name := Label.new()
+	name.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	name.text = title
+	name.custom_minimum_size = Vector2(52, 0)
+	name.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	name.add_theme_font_size_override("font_size", 18)
+	name.add_theme_color_override("font_color", AshTheme.gold() if pid == HUMAN else Color("f0a070"))
+	row.add_child(name)
+
+	var life_col := VBoxContainer.new()
+	life_col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	life_col.custom_minimum_size = Vector2(150, 0)
+	row.add_child(life_col)
+	var life_label := Label.new()
+	life_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	life_label.text = "Life %d" % int(who.life)
+	life_label.add_theme_font_size_override("font_size", 12)
+	life_label.add_theme_color_override("font_color", AshTheme.ink())
+	life_col.add_child(life_label)
+	var track := Control.new()
+	track.custom_minimum_size = Vector2(140, 8)
+	track.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	life_col.add_child(track)
+	var back := ColorRect.new()
+	back.set_anchors_preset(Control.PRESET_FULL_RECT)
+	back.color = Color("2a1818")
+	back.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	track.add_child(back)
+	var ratio := clampf(float(who.life) / 30.0, 0.0, 1.0)
+	var fill := ColorRect.new()
+	fill.anchor_right = ratio
+	fill.anchor_bottom = 1.0
+	fill.color = Color("e15b5b") if int(who.life) <= 10 else Color("e07a3d")
+	fill.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	track.add_child(fill)
+
+	var spark_col := VBoxContainer.new()
+	spark_col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(spark_col)
+	var spark_label := Label.new()
+	spark_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	spark_label.text = "Spark %d / %d" % [int(who.energy), int(who.max_energy)]
+	spark_label.add_theme_font_size_override("font_size", 12)
+	spark_label.add_theme_color_override("font_color", AshTheme.gold())
+	spark_col.add_child(spark_label)
+	var pips := HBoxContainer.new()
+	pips.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	pips.add_theme_constant_override("separation", 3)
+	spark_col.add_child(pips)
+	var cap := maxi(int(who.max_energy), 1)
+	for i in cap:
+		var pip := ColorRect.new()
+		pip.custom_minimum_size = Vector2(9, 9)
+		pip.color = AshTheme.gold() if i < int(who.energy) else Color("3a2e28")
+		pip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		pips.add_child(pip)
+
+	var piles := Label.new()
+	piles.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	piles.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	piles.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	piles.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	piles.text = "%s\nDeck %d   Grave %d   Veil %d" % [
+		str(deck.get("name", "")), who.deck.size(), who.grave.size(), who.veil.size(),
 	]
+	piles.add_theme_font_size_override("font_size", 12)
+	piles.add_theme_color_override("font_color", AshTheme.muted())
+	row.add_child(piles)
 
 
 func _fill_row(row: HBoxContainer, pid: int, zone: String, hidden: bool) -> void:
@@ -310,7 +399,12 @@ func _fill_row(row: HBoxContainer, pid: int, zone: String, hidden: bool) -> void
 	for card in duel.players[pid][zone]:
 		var widget := CardWidgetScript.new()
 		widget.zone_name = zone
-		widget.custom_minimum_size = Vector2(72, 36) if hidden else Vector2(132, 168)
+		if hidden:
+			widget.custom_minimum_size = Vector2(40, 52)
+			widget.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		else:
+			widget.custom_minimum_size = Vector2(150, 198)
+			widget.size_flags_vertical = Control.SIZE_SHRINK_END
 		if hidden:
 			widget.present_back()
 		else:
@@ -328,15 +422,17 @@ func _fill_lanes(row: HBoxContainer, pid: int) -> void:
 	var marks := _marks()
 	for lane_i in DuelScript.LANES:
 		var panel := Panel.new()
-		panel.custom_minimum_size = Vector2(150, 112)
+		panel.custom_minimum_size = Vector2(148, 128)
 		panel.set_meta("who", pid)
 		panel.set_meta("lane", lane_i)
 		var box := StyleBoxFlat.new()
 		var empty: bool = duel.players[pid].board[lane_i] == null
-		box.bg_color = Color("1a1524") if empty else Color("241c30")
-		box.border_color = Color("3a3348")
+		box.bg_color = Color(0.09, 0.05, 0.04, 0.55) if empty else Color(0.1, 0.06, 0.05, 0.88)
+		box.border_color = Color("6a3e28")
 		box.set_border_width_all(2)
-		box.set_corner_radius_all(8)
+		box.set_corner_radius_all(12)
+		box.shadow_color = Color(0, 0, 0, 0.45)
+		box.shadow_size = 4
 		if pid == HUMAN and bool(marks.lanes.get(lane_i, false)):
 			box.border_color = Color("f2c14e")
 		panel.add_theme_stylebox_override("panel", box)
@@ -363,7 +459,8 @@ func _fill_lanes(row: HBoxContainer, pid: int) -> void:
 			label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			label.set_anchors_preset(Control.PRESET_FULL_RECT)
 			label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			label.add_theme_color_override("font_color", Color("6d6580"))
+			label.add_theme_font_size_override("font_size", 13)
+			label.add_theme_color_override("font_color", Color("8a6248"))
 			panel.add_child(label)
 		row.add_child(panel)
 
@@ -371,20 +468,23 @@ func _fill_lanes(row: HBoxContainer, pid: int) -> void:
 func _fill_veil() -> void:
 	_wipe(veil_row)
 	var title := Label.new()
-	title.text = "Your veil"
-	title.add_theme_color_override("font_color", Color("b9a7d6"))
+	title.text = "Veil"
+	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 14)
+	title.add_theme_color_override("font_color", Color("e7c6ff"))
 	veil_row.add_child(title)
 	var marks := _marks()
 	if duel.players[HUMAN].veil.is_empty():
 		var none := Label.new()
-		none.text = "empty"
-		none.add_theme_color_override("font_color", Color("6d6580"))
+		none.text = "nothing set"
+		none.add_theme_color_override("font_color", Color("8d7a90"))
 		veil_row.add_child(none)
 		return
 	for card in duel.players[HUMAN].veil:
 		var widget := CardWidgetScript.new()
 		widget.zone_name = "veil"
-		widget.custom_minimum_size = Vector2(150, 64)
+		widget.custom_minimum_size = Vector2(168, 70)
+		widget.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		widget.present(db[str(card.def_id)], card, true)
 		widget.set_marked(_marked(marks, int(card.iid), "veil"))
 		widget.clicked.connect(_click_card.bind("veil", HUMAN))
