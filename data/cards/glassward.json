@@ -1,0 +1,645 @@
+[
+  {
+    "id": "glass_seneschal",
+    "name": "Glass Seneschal",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 3,
+    "atk": 2,
+    "hp": 4,
+    "keywords": [
+      "ward"
+    ],
+    "text": "Ward. Whenever you cast a spell, heal your warden for 2.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_spell": [
+        {
+          "op": "heal",
+          "amount": 2,
+          "target": {
+            "scope": "your_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "veil_sentry",
+    "name": "Veil Sentry",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 2,
+    "atk": 2,
+    "hp": 3,
+    "keywords": [
+      "guard",
+      "ward"
+    ],
+    "text": "Guard, Ward. On play, draw 1, then shed your cheapest card.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "draw",
+          "amount": 1,
+          "target": {
+            "scope": "you"
+          }
+        },
+        {
+          "op": "shed",
+          "amount": 1,
+          "target": {
+            "scope": "you"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "spellglass",
+    "name": "Spellglass",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 4,
+    "atk": 3,
+    "hp": 4,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. Whenever you cast a spell, deal 1 to the enemy warden.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_spell": [
+        {
+          "op": "damage",
+          "amount": 1,
+          "target": {
+            "scope": "opponent_warden"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "glass_golem",
+    "name": "Glass Golem",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 5,
+    "atk": 5,
+    "hp": 5,
+    "keywords": [
+      "ward"
+    ],
+    "text": "Ward. Shed 2. On play, silence all enemy units.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "silence",
+          "target": {
+            "scope": "all_enemy_units"
+          }
+        }
+      ]
+    },
+    "alt": {
+      "type": "discard",
+      "amount": 2
+    }
+  },
+  {
+    "id": "lens_wisp",
+    "name": "Lens Wisp",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 1,
+    "atk": 1,
+    "hp": 1,
+    "keywords": [
+      "rush"
+    ],
+    "text": "Rush. On play, fetch the cheapest trap from your deck.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "fetch",
+          "type": "trap",
+          "dest": "hand"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prismatic_wall",
+    "name": "Prismatic Wall",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 3,
+    "atk": 0,
+    "hp": 7,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On death, bounce all enemy units.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_death": [
+        {
+          "op": "bounce",
+          "target": {
+            "scope": "all_enemy_units"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "archive_owl",
+    "name": "Archive Owl",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 2,
+    "atk": 2,
+    "hp": 2,
+    "keywords": [
+      "rush"
+    ],
+    "text": "Rush. On play, draw 1, then mill 1.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "draw",
+          "amount": 1,
+          "target": {
+            "scope": "you"
+          }
+        },
+        {
+          "op": "mill",
+          "amount": 1,
+          "target": {
+            "scope": "you"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "wardweaver",
+    "name": "Wardweaver",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 3,
+    "atk": 2,
+    "hp": 3,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On play, grant Ward to a friendly unit.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "friendly"
+      }
+    ],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "grant_keyword",
+          "keyword": "ward",
+          "target": {
+            "ref": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "hush_beacon",
+    "name": "Hush Beacon",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 4,
+    "atk": 3,
+    "hp": 5,
+    "keywords": [
+      "ward"
+    ],
+    "text": "Ward. Enemy spells cost 1 more spark. On death, draw 1.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "while_board": [
+        {
+          "op": "aura_tax",
+          "amount": 1,
+          "who": "enemy_spells"
+        }
+      ],
+      "on_death": [
+        {
+          "op": "draw",
+          "amount": 1,
+          "target": {
+            "scope": "you"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "pane_knight",
+    "name": "Pane Knight",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 3,
+    "atk": 4,
+    "hp": 2,
+    "keywords": [
+      "pierce",
+      "rush"
+    ],
+    "text": "Pierce, Rush. On attack, silence the defender.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_attack": [
+        {
+          "op": "silence",
+          "target": {
+            "scope": "event_defender"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "shard_auditor",
+    "name": "Shard Auditor",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 2,
+    "atk": 2,
+    "hp": 3,
+    "keywords": [
+      "ward"
+    ],
+    "text": "Ward. Whenever you cast a spell, if you have 2 or fewer cards in hand, draw 1.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_spell": [
+        {
+          "op": "draw",
+          "amount": 1,
+          "target": {
+            "scope": "you"
+          },
+          "if": {
+            "kind": "your_hand_at_most",
+            "n": 2
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "mirror_mason",
+    "name": "Mirror Mason",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 4,
+    "atk": 3,
+    "hp": 5,
+    "keywords": [
+      "guard"
+    ],
+    "text": "Guard. On play, summon a Shard Mite.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "summon",
+          "card": "shard_mite"
+        }
+      ]
+    }
+  },
+  {
+    "id": "refraction_slime",
+    "name": "Refraction Slime",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 2,
+    "atk": 1,
+    "hp": 4,
+    "keywords": [
+      "siphon"
+    ],
+    "text": "Siphon. While this is on the board, whenever any unit dies, heal your warden for 1.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "while_board": [
+        {
+          "op": "listen",
+          "event": "any_death",
+          "effects": [
+            {
+              "op": "heal",
+              "amount": 1,
+              "target": {
+                "scope": "your_warden"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "crown_bearer",
+    "name": "Crown Bearer",
+    "faction": "glassward",
+    "type": "unit",
+    "cost": 6,
+    "atk": 5,
+    "hp": 5,
+    "keywords": [
+      "breach",
+      "pierce"
+    ],
+    "text": "Breach, Pierce. On play, deal 2 to all enemy units.",
+    "targets": [],
+    "picks": [],
+    "hooks": {
+      "on_play": [
+        {
+          "op": "damage",
+          "amount": 2,
+          "target": {
+            "scope": "all_enemy_units"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "mute_sigil",
+    "name": "Mute Sigil",
+    "faction": "glassward",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 2,
+    "text": "Silence a unit. It loses keywords, hooks, and bonus stats.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "any"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "silence",
+        "target": {
+          "ref": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "pane_hex",
+    "name": "Pane Hex",
+    "faction": "glassward",
+    "type": "spell",
+    "speed": "instant",
+    "cost": 3,
+    "text": "Bounce a unit to its owner's hand.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "any"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "bounce",
+        "target": {
+          "ref": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "seal_the_pane",
+    "name": "Seal the Pane",
+    "faction": "glassward",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 2,
+    "text": "Destroy a facedown card in the enemy veil. Draw 1.",
+    "targets": [
+      {
+        "accept": "veil",
+        "side": "enemy"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "destroy",
+        "target": {
+          "ref": 0
+        }
+      },
+      {
+        "op": "draw",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crystal_tutor",
+    "name": "Crystal Tutor",
+    "faction": "glassward",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 1,
+    "text": "Search your deck for a spell and put it into your hand.",
+    "targets": [],
+    "picks": [
+      {
+        "zone": "deck",
+        "type": "spell",
+        "count": 1
+      }
+    ],
+    "effects": [
+      {
+        "op": "take_pick",
+        "index": 0,
+        "dest": "hand"
+      }
+    ]
+  },
+  {
+    "id": "fracture_bolt",
+    "name": "Fracture Bolt",
+    "faction": "glassward",
+    "type": "spell",
+    "speed": "instant",
+    "cost": 1,
+    "text": "Deal 3 to a unit.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "any"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "damage",
+        "amount": 3,
+        "target": {
+          "ref": 0
+        }
+      }
+    ]
+  },
+  {
+    "id": "crown_of_shards",
+    "name": "Crown of Shards",
+    "faction": "glassward",
+    "type": "spell",
+    "speed": "sorcery",
+    "cost": 7,
+    "text": "Deal 5 to the enemy warden, silence all enemy units, and draw 1.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "damage",
+        "amount": 5,
+        "target": {
+          "scope": "opponent_warden"
+        }
+      },
+      {
+        "op": "silence",
+        "target": {
+          "scope": "all_enemy_units"
+        }
+      },
+      {
+        "op": "draw",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      }
+    ]
+  },
+  {
+    "id": "latch_of_glass",
+    "name": "Latch of Glass",
+    "faction": "glassward",
+    "type": "trap",
+    "cost": 2,
+    "trigger": "summon",
+    "text": "Answer a unit played from hand: negate that summon.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "negate"
+      }
+    ]
+  },
+  {
+    "id": "shattered_oath",
+    "name": "Shattered Oath",
+    "faction": "glassward",
+    "type": "trap",
+    "cost": 3,
+    "trigger": "spell",
+    "text": "Answer a spell: negate it.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "negate"
+      }
+    ]
+  },
+  {
+    "id": "quiet_hall",
+    "name": "Quiet Hall",
+    "faction": "glassward",
+    "type": "trap",
+    "cost": 1,
+    "trigger": "attack",
+    "text": "Answer an attack: silence the attacker.",
+    "targets": [],
+    "picks": [],
+    "effects": [
+      {
+        "op": "silence",
+        "target": {
+          "scope": "event_attacker"
+        }
+      }
+    ]
+  },
+  {
+    "id": "snare_lattice",
+    "name": "Snare Lattice",
+    "faction": "glassward",
+    "type": "trap",
+    "cost": 2,
+    "trigger": "any",
+    "text": "Answer any chain link: deal 2 to a unit and draw 1.",
+    "targets": [
+      {
+        "accept": "unit",
+        "side": "any"
+      }
+    ],
+    "picks": [],
+    "effects": [
+      {
+        "op": "damage",
+        "amount": 2,
+        "target": {
+          "ref": 0
+        }
+      },
+      {
+        "op": "draw",
+        "amount": 1,
+        "target": {
+          "scope": "you"
+        }
+      }
+    ]
+  }
+]
