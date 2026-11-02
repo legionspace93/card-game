@@ -7,11 +7,18 @@ const AshTheme = preload("res://scripts/ash_theme.gd")
 var seed_key: String = ""
 var faction: String = "wayline"
 var kind: String = "unit"
+var portrait: Texture2D = null
 
 
 func _draw() -> void:
 	var s := size
 	if s.x < 8.0 or s.y < 8.0:
+		return
+	if portrait != null:
+		var src := portrait.get_size()
+		var region := Rect2(0, 0, src.x, src.y * 0.66)
+		draw_texture_rect_region(portrait, Rect2(Vector2.ZERO, s), region)
+		draw_rect(Rect2(Vector2.ZERO, s), Color(0, 0, 0, 0.18), false, 1.0)
 		return
 	var pal: Dictionary = AshTheme.palette(faction)
 	var accent: Color = pal.accent

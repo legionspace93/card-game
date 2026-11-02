@@ -1,6 +1,7 @@
 [
   {
     "id": "barrow_mite",
+    "art": "res://art/mirevault/barrow_mite.png",
     "name": "Barrow Mite",
     "faction": "mirevault",
     "type": "unit",
@@ -27,6 +28,7 @@
   },
   {
     "id": "peat_shambler",
+    "art": "res://art/mirevault/peat_shambler.png",
     "name": "Peat Shambler",
     "faction": "mirevault",
     "type": "unit",
@@ -50,6 +52,7 @@
   },
   {
     "id": "mire_colossus",
+    "art": "res://art/mirevault/mire_colossus.png",
     "name": "Mire Colossus",
     "faction": "mirevault",
     "type": "unit",
@@ -80,6 +83,7 @@
   },
   {
     "id": "grave_tender",
+    "art": "res://art/mirevault/grave_tender.png",
     "name": "Grave Tender",
     "faction": "mirevault",
     "type": "unit",
@@ -110,6 +114,7 @@
   },
   {
     "id": "sporeburst",
+    "art": "res://art/mirevault/sporeburst.png",
     "name": "Sporeburst",
     "faction": "mirevault",
     "type": "unit",
@@ -136,6 +141,7 @@
   },
   {
     "id": "bog_warden",
+    "art": "res://art/mirevault/bog_warden.png",
     "name": "Bog Warden",
     "faction": "mirevault",
     "type": "unit",
@@ -169,6 +175,7 @@
   },
   {
     "id": "lantern_leech",
+    "art": "res://art/mirevault/lantern_leech.png",
     "name": "Lantern Leech",
     "faction": "mirevault",
     "type": "unit",
@@ -195,6 +202,7 @@
   },
   {
     "id": "barrow_wall",
+    "art": "res://art/mirevault/barrow_wall.png",
     "name": "Barrow Wall",
     "faction": "mirevault",
     "type": "unit",
@@ -221,6 +229,7 @@
   },
   {
     "id": "rootcage",
+    "art": "res://art/mirevault/rootcage.png",
     "name": "Rootcage",
     "faction": "mirevault",
     "type": "unit",
@@ -247,6 +256,7 @@
   },
   {
     "id": "widow_moss",
+    "art": "res://art/mirevault/widow_moss.png",
     "name": "Widow Moss",
     "faction": "mirevault",
     "type": "unit",
@@ -273,6 +283,7 @@
   },
   {
     "id": "bog_whisper",
+    "art": "res://art/mirevault/bog_whisper.png",
     "name": "Bog Whisper",
     "faction": "mirevault",
     "type": "unit",
@@ -300,6 +311,7 @@
   },
   {
     "id": "dredge_grub",
+    "art": "res://art/mirevault/dredge_grub.png",
     "name": "Dredge Grub",
     "faction": "mirevault",
     "type": "unit",
@@ -338,6 +350,7 @@
   },
   {
     "id": "bone_lantern",
+    "art": "res://art/mirevault/bone_lantern.png",
     "name": "Bone Lantern",
     "faction": "mirevault",
     "type": "unit",
@@ -370,6 +383,7 @@
   },
   {
     "id": "hungering_barrow",
+    "art": "res://art/mirevault/hungering_barrow.png",
     "name": "Hungering Barrow",
     "faction": "mirevault",
     "type": "unit",
@@ -401,6 +415,7 @@
   },
   {
     "id": "mire_lamp",
+    "art": "res://art/mirevault/mire_lamp.png",
     "name": "Mire Lamp",
     "faction": "mirevault",
     "type": "unit",
@@ -425,6 +440,7 @@
   },
   {
     "id": "tribute_of_roots",
+    "art": "res://art/mirevault/tribute_of_roots.png",
     "name": "Tribute of Roots",
     "faction": "mirevault",
     "type": "spell",
@@ -456,6 +472,7 @@
   },
   {
     "id": "mulch_the_line",
+    "art": "res://art/mirevault/mulch_the_line.png",
     "name": "Mulch the Line",
     "faction": "mirevault",
     "type": "spell",
@@ -487,6 +504,7 @@
   },
   {
     "id": "crypt_tutor",
+    "art": "res://art/mirevault/crypt_tutor.png",
     "name": "Crypt Tutor",
     "faction": "mirevault",
     "type": "spell",
@@ -515,6 +533,7 @@
   },
   {
     "id": "mossbind",
+    "art": "res://art/mirevault/mossbind.png",
     "name": "Mossbind",
     "faction": "mirevault",
     "type": "spell",
@@ -546,6 +565,7 @@
   },
   {
     "id": "thicket_reclaim",
+    "art": "res://art/mirevault/thicket_reclaim.png",
     "name": "Thicket Reclaim",
     "faction": "mirevault",
     "type": "spell",
@@ -567,6 +587,7 @@
   },
   {
     "id": "last_harvest",
+    "art": "res://art/mirevault/last_harvest.png",
     "name": "Last Harvest",
     "faction": "mirevault",
     "type": "spell",
@@ -598,6 +619,7 @@
   },
   {
     "id": "sacrifice_rite",
+    "art": "res://art/mirevault/sacrifice_rite.png",
     "name": "Sacrifice Rite",
     "faction": "mirevault",
     "type": "spell",
@@ -619,6 +641,7 @@
   },
   {
     "id": "mire_snare",
+    "art": "res://art/mirevault/mire_snare.png",
     "name": "Mire Snare",
     "faction": "mirevault",
     "type": "trap",
@@ -642,6 +665,7 @@
   },
   {
     "id": "root_net",
+    "art": "res://art/mirevault/root_net.png",
     "name": "Root Net",
     "faction": "mirevault",
     "type": "trap",

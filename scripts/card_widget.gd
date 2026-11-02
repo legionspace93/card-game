@@ -70,6 +70,7 @@ func present(defn: Dictionary, inst: Dictionary, compact: bool, attack: int = -1
 	sigil.seed_key = str(defn.get("id", defn.get("name", "")))
 	sigil.faction = faction
 	sigil.kind = _kind
+	sigil.portrait = _load_portrait(str(defn.get("art", "")))
 	sigil.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	sigil.custom_minimum_size = Vector2(0, 44 if compact else 52)
 	sigil.size_flags_vertical = Control.SIZE_EXPAND_FILL if compact else Control.SIZE_SHRINK_CENTER
@@ -123,6 +124,15 @@ func present(defn: Dictionary, inst: Dictionary, compact: bool, attack: int = -1
 	cost.z_index = 2
 	add_child(cost)
 	queue_redraw()
+
+
+func _load_portrait(path: String) -> Texture2D:
+	if path == "":
+		return null
+	var image := Image.new()
+	if image.load(path) != OK:
+		return null
+	return ImageTexture.create_from_image(image)
 
 
 func present_back(_count_label: String = "") -> void:

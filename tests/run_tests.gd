@@ -25,6 +25,7 @@ func _init() -> void:
 	_test_combat_keywords()
 	_test_aura_and_tax()
 	_test_bot_game()
+	_test_mirevault_art()
 	call_deferred("_finish_view")
 
 
@@ -571,6 +572,24 @@ func _test_bot_game() -> void:
 	check(damage > 0, "the game dealt damage")
 	check(str(duel.win_reason) == "life" or str(duel.win_reason) == "deck", "win reason")
 	print("  bot game steps %d winner %d via %s" % [steps, duel.winner, duel.win_reason])
+
+
+func _test_mirevault_art() -> void:
+	var deck: Dictionary = CardDBScript.load_deck("res://data/decks/mirevault.json")
+	var painted := 0
+	for id in deck.cards:
+		var card: Dictionary = db[id]
+		var path := "res://art/mirevault/%s.png" % str(id)
+		check(str(card.get("art", "")) == path, "mire deck art path " + str(id))
+		var image := Image.new()
+		check(image.load(path) == OK, "mire deck art file " + str(id))
+		painted += 1
+	check(str(db.peat_spore.get("art", "")) == "res://art/mirevault/peat_spore.png", "peat spore art")
+	var spore := Image.new()
+	check(spore.load("res://art/mirevault/peat_spore.png") == OK, "peat spore file")
+	check(not db.cinder_skirmisher.has("art"), "emberline keeps the emblem")
+	check(not db.latch_of_glass.has("art"), "glassward keeps the emblem")
+	check(painted == 32, "mire deck painted count")
 
 
 func _test_flashes_and_table() -> void:

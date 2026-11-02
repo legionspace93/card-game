@@ -46,7 +46,7 @@ scripts/      view
 vfx/          flashes
 ```
 
-Card frames, faction sigils, and the table are drawn in the engine. No imported art.
+Card frames, spark gems, and the table are drawn in the engine. Mirevault Barrow, the Wayline cards in that deck, and the Peat Spore token use painted portraits in `art/mirevault/`. Emberline and Glassward keep their drawn emblems.
 
 ## Limits
 

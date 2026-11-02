@@ -1,6 +1,7 @@
 [
   {
     "id": "road_warden",
+    "art": "res://art/mirevault/road_warden.png",
     "name": "Road Warden",
     "faction": "wayline",
     "type": "unit",
@@ -53,6 +54,7 @@
   },
   {
     "id": "field_medic",
+    "art": "res://art/mirevault/field_medic.png",
     "name": "Field Medic",
     "faction": "wayline",
     "type": "unit",
@@ -164,6 +166,7 @@
   },
   {
     "id": "chain_medic",
+    "art": "res://art/mirevault/chain_medic.png",
     "name": "Chain Medic",
     "faction": "wayline",
     "type": "unit",
@@ -213,6 +216,7 @@
   },
   {
     "id": "tax_scribe",
+    "art": "res://art/mirevault/tax_scribe.png",
     "name": "Tax Scribe",
     "faction": "wayline",
     "type": "unit",
@@ -302,6 +306,7 @@
   },
   {
     "id": "night_broker",
+    "art": "res://art/mirevault/night_broker.png",
     "name": "Night Broker",
     "faction": "wayline",
     "type": "unit",
@@ -393,6 +398,7 @@
   },
   {
     "id": "banishing_seal",
+    "art": "res://art/mirevault/banishing_seal.png",
     "name": "Banishing Seal",
     "faction": "wayline",
     "type": "spell",
@@ -454,6 +460,7 @@
   },
   {
     "id": "energy_well",
+    "art": "res://art/mirevault/energy_well.png",
     "name": "Energy Well",
     "faction": "wayline",
     "type": "spell",
@@ -651,6 +658,7 @@
   },
   {
     "id": "cache_ward",
+    "art": "res://art/mirevault/cache_ward.png",
     "name": "Cache Ward",
     "faction": "wayline",
     "type": "trap",
